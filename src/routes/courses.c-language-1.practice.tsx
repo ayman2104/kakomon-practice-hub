@@ -52,7 +52,7 @@ function Practice() {
   const [selectedTimerMinutes, setSelectedTimerMinutes] = useState(0);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [availableQuestions, setAvailableQuestions] = useState<any[]>([]);
-  const [availableLoading, setAvailableLoading] = useState(true);
+  const [availableLoading, setAvailableLoading] = useState(false);
   const [courseId, setCourseId] = useState<string | null>(null);
   const [attemptId, setAttemptId] = useState<string | null>(null);
   const [questions, setQuestions] = useState<any[]>([]);
@@ -60,6 +60,11 @@ function Practice() {
   const [idx, setIdx] = useState(0);
 
   const q = questions[idx];
+
+  useEffect(() => {
+    void loadAvailableQuestions();
+  }, []);
+
   useEffect(() => {
     if (phase !== "practice") return;
     if (timeLeft === null) return;
@@ -452,14 +457,10 @@ function Practice() {
             <button
               type="button"
               onClick={startPractice}
-              disabled={loading || availableLoading || selectedAvailableCount === 0}
+              disabled={loading || selectedRounds.length === 0}
               className="w-full rounded-full bg-primary text-primary-foreground py-3 font-medium hover:opacity-90 disabled:opacity-60"
             >
-              {loading || availableLoading
-                ? "読み込み中..."
-                : selectedAvailableCount === 0
-                  ? "問題がありません"
-                  : "開始する"}
+              {loading ? "読み込み中..." : "開始する"}
             </button>
           </div>
         </div>

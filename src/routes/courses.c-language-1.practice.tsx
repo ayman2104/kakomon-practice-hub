@@ -333,7 +333,7 @@ function Practice() {
             </Link>
 
             <div className="text-xs text-primary font-medium">Ｃ++言語Ⅰ / ランダム問題</div>
-            <h1 className="text-2xl font-bold mt-1">ランダム問題の設定</h1>
+            <h1 className="text-2xl font-bold mt-1">ランダム問題の設定 v2</h1>
             <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
               出題数、範囲、難易度を選んでから開始します。
             </p>

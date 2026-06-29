@@ -32,7 +32,6 @@ function AdminLogin() {
           <input type="password" value={pin} onChange={(e) => setPin(e.target.value)} placeholder="PIN" className="w-full rounded-xl border border-border bg-input/40 px-4 py-3 outline-none focus:border-primary" />
           <button className="w-full rounded-full bg-primary text-primary-foreground py-3 font-medium">ログイン</button>
         </form>
-        <p className="text-[10px] text-center text-muted-foreground mt-4">デフォルト: admin2026</p>
       </div>
     </div>
   );

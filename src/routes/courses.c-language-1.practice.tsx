@@ -333,7 +333,7 @@ function Practice() {
             </Link>
 
             <div className="text-xs text-primary font-medium">Ｃ++言語Ⅰ / ランダム問題</div>
-            <h1 className="text-2xl font-bold mt-1">ランダム問題の設定 v2</h1>
+            <h1 className="text-2xl font-bold mt-1">ランダム問題の設定</h1>
             <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
               出題数、範囲、難易度を選んでから開始します。
             </p>
@@ -379,9 +379,7 @@ function Practice() {
                         <div>
                           <div className="font-semibold">{round.label}</div>
                           <div className="text-xs text-muted-foreground mt-1">{round.desc}</div>
-                          <div className="text-xs text-primary mt-2 font-medium">
-                            {availableLoading ? "読み込み中..." : `${getRoundCount(round.key)}問`}
-                          </div>
+                          <div className="text-xs text-primary mt-2 font-medium">出題対象</div>
                         </div>
                         <div
                           className={`h-6 w-6 rounded-full border flex items-center justify-center text-xs ${
@@ -442,9 +440,7 @@ function Practice() {
               </div>
             </section>
             <div className="rounded-2xl bg-primary/10 border border-primary/20 px-4 py-4 text-sm">
-              <div className="font-medium">
-                選択中の条件: {availableLoading ? "読み込み中..." : `${selectedAvailableCount}問`}
-              </div>
+              <div className="font-medium">選択した条件でランダムに出題します</div>
               <div className="text-xs text-muted-foreground mt-1">
                 出題数より少ない場合は、見つかった問題数だけで開始します。
               </div>
@@ -452,14 +448,10 @@ function Practice() {
             <button
               type="button"
               onClick={startPractice}
-              disabled={loading || selectedAvailableCount === 0}
+              disabled={loading || selectedRounds.length === 0}
               className="w-full rounded-full bg-primary text-primary-foreground py-3 font-medium hover:opacity-90 disabled:opacity-60"
             >
-              {loading
-                ? "読み込み中..."
-                : selectedAvailableCount === 0
-                  ? "問題がありません"
-                  : "開始する"}
+              {loading ? "読み込み中..." : "開始する"}
             </button>
           </div>
         </div>

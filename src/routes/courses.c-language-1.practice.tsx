@@ -88,28 +88,44 @@ function Practice() {
 
       const { data: course, error: courseError } = await db
         .from("courses")
-        .select("id")
+        .select("id, slug")
         .eq("slug", "c-language-1")
-        .single();
+        .maybeSingle();
 
-      if (courseError || !course) {
-        console.warn(courseError);
+      if (courseError) {
+        console.error("Course fetch error:", courseError);
+        toast.error(`コース取得エラー: ${courseError.message}`);
+        setAvailableQuestions([]);
+        return;
+      }
+
+      if (!course) {
+        console.error("Course not found");
+        toast.error("コースが見つかりません");
+        setAvailableQuestions([]);
         return;
       }
 
       const { data, error } = await db
         .from("questions")
-        .select("id, source_round, difficulty")
+        .select("id, source_round, difficulty, question_type")
         .eq("course_id", course.id)
         .eq("is_active", true)
         .eq("question_type", "random_multiple_choice");
 
       if (error) {
-        console.warn(error);
+        console.error("Questions fetch error:", error);
+        toast.error(`問題取得エラー: ${error.message}`);
+        setAvailableQuestions([]);
         return;
       }
 
+      console.log("Available random questions:", data);
       setAvailableQuestions(data ?? []);
+    } catch (error) {
+      console.error("Unexpected load error:", error);
+      toast.error("問題の読み込み中にエラーが発生しました");
+      setAvailableQuestions([]);
     } finally {
       setAvailableLoading(false);
     }

@@ -8,8 +8,27 @@ export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
 });
 
+const COURSES = [
+  {
+    slug: "c-language-1",
+    to: "/courses/c-language-1",
+    icon: "📘",
+    category: "プログラミング",
+    title: "Ｃ++言語Ⅰ",
+    label: "期末試験・ランダム問題",
+  },
+  {
+    slug: "java-language-1",
+    to: "/courses/java-language-1",
+    icon: "☕",
+    category: "プログラミング",
+    title: "Java言語Ⅰ",
+    label: "ランダム問題",
+  },
+];
+
 function Dashboard() {
-  function logCourseOpen() {
+  function logCourseOpen(slug: string) {
     const s = getStudent();
     if (!s) return;
 
@@ -18,7 +37,7 @@ function Dashboard() {
         const { data: course, error: courseError } = await supabase
           .from("courses")
           .select("id")
-          .eq("slug", "c-language-1")
+          .eq("slug", slug)
           .maybeSingle();
 
         if (courseError || !course) {
@@ -53,29 +72,32 @@ function Dashboard() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Link
-            to="/courses/c-language-1"
-            onClick={logCourseOpen}
-            className="group bg-card rounded-3xl shadow-[var(--shadow-card)] p-5 min-h-[150px] hover:-translate-y-1 hover:shadow-lg transition flex flex-col justify-between"
-          >
-            <div className="space-y-3">
-              <div className="h-10 w-10 rounded-2xl bg-primary/10 flex items-center justify-center text-xl">
-                📘
+          {COURSES.map((course) => (
+            <Link
+              key={course.slug}
+              to={course.to}
+              onClick={() => logCourseOpen(course.slug)}
+              className="group bg-card rounded-3xl shadow-[var(--shadow-card)] p-5 min-h-[150px] hover:-translate-y-1 hover:shadow-lg transition flex flex-col justify-between"
+            >
+              <div className="space-y-3">
+                <div className="h-10 w-10 rounded-2xl bg-primary/10 flex items-center justify-center text-xl">
+                  {course.icon}
+                </div>
+
+                <div>
+                  <div className="text-xs text-primary font-medium">{course.category}</div>
+                  <h2 className="text-xl font-bold mt-1">{course.title}</h2>
+                </div>
               </div>
 
-              <div>
-                <div className="text-xs text-primary font-medium">プログラミング</div>
-                <h2 className="text-xl font-bold mt-1">Ｃ++言語Ⅰ</h2>
+              <div className="flex items-center justify-between mt-5">
+                <span className="text-sm text-muted-foreground">{course.label}</span>
+                <span className="rounded-full bg-primary text-primary-foreground px-4 py-2 text-sm font-medium group-hover:opacity-90">
+                  開く →
+                </span>
               </div>
-            </div>
-
-            <div className="flex items-center justify-between mt-5">
-              <span className="text-sm text-muted-foreground">期末試験対策</span>
-              <span className="rounded-full bg-primary text-primary-foreground px-4 py-2 text-sm font-medium group-hover:opacity-90">
-                開く →
-              </span>
-            </div>
-          </Link>
+            </Link>
+          ))}
         </div>
       </div>
     </StudentShell>

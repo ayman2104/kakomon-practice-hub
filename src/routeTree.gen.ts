@@ -13,6 +13,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as CoursesJavaLanguage1RouteImport } from './routes/courses.java-language-1'
 import { Route as CoursesCLanguage1RouteImport } from './routes/courses.c-language-1'
 import { Route as AdminStudentDataRouteImport } from './routes/admin.student-data'
 import { Route as AdminQuestionsRouteImport } from './routes/admin.questions'
@@ -20,6 +21,7 @@ import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminFeedbackRouteImport } from './routes/admin.feedback'
 import { Route as AdminAiGeneratorRouteImport } from './routes/admin.ai-generator'
 import { Route as AdminActivityLogsRouteImport } from './routes/admin.activity-logs'
+import { Route as CoursesJavaLanguage1PracticeRouteImport } from './routes/courses.java-language-1.practice'
 import { Route as CoursesCLanguage1PracticeRouteImport } from './routes/courses.c-language-1.practice'
 import { Route as AttemptsAttemptIdResultRouteImport } from './routes/attempts.$attemptId.result'
 import { Route as CoursesCLanguage1ExamsFinal2026FirstRouteImport } from './routes/courses.c-language-1.exams.final-2026-first'
@@ -42,6 +44,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesJavaLanguage1Route = CoursesJavaLanguage1RouteImport.update({
+  id: '/courses/java-language-1',
+  path: '/courses/java-language-1',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CoursesCLanguage1Route = CoursesCLanguage1RouteImport.update({
@@ -79,6 +86,12 @@ const AdminActivityLogsRoute = AdminActivityLogsRouteImport.update({
   path: '/admin/activity-logs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoursesJavaLanguage1PracticeRoute =
+  CoursesJavaLanguage1PracticeRouteImport.update({
+    id: '/practice',
+    path: '/practice',
+    getParentRoute: () => CoursesJavaLanguage1Route,
+  } as any)
 const CoursesCLanguage1PracticeRoute =
   CoursesCLanguage1PracticeRouteImport.update({
     id: '/practice',
@@ -108,9 +121,11 @@ export interface FileRoutesByFullPath {
   '/admin/questions': typeof AdminQuestionsRoute
   '/admin/student-data': typeof AdminStudentDataRoute
   '/courses/c-language-1': typeof CoursesCLanguage1RouteWithChildren
+  '/courses/java-language-1': typeof CoursesJavaLanguage1RouteWithChildren
   '/admin/': typeof AdminIndexRoute
   '/attempts/$attemptId/result': typeof AttemptsAttemptIdResultRoute
   '/courses/c-language-1/practice': typeof CoursesCLanguage1PracticeRoute
+  '/courses/java-language-1/practice': typeof CoursesJavaLanguage1PracticeRoute
   '/courses/c-language-1/exams/final-2026-first': typeof CoursesCLanguage1ExamsFinal2026FirstRoute
 }
 export interface FileRoutesByTo {
@@ -124,9 +139,11 @@ export interface FileRoutesByTo {
   '/admin/questions': typeof AdminQuestionsRoute
   '/admin/student-data': typeof AdminStudentDataRoute
   '/courses/c-language-1': typeof CoursesCLanguage1RouteWithChildren
+  '/courses/java-language-1': typeof CoursesJavaLanguage1RouteWithChildren
   '/admin': typeof AdminIndexRoute
   '/attempts/$attemptId/result': typeof AttemptsAttemptIdResultRoute
   '/courses/c-language-1/practice': typeof CoursesCLanguage1PracticeRoute
+  '/courses/java-language-1/practice': typeof CoursesJavaLanguage1PracticeRoute
   '/courses/c-language-1/exams/final-2026-first': typeof CoursesCLanguage1ExamsFinal2026FirstRoute
 }
 export interface FileRoutesById {
@@ -141,9 +158,11 @@ export interface FileRoutesById {
   '/admin/questions': typeof AdminQuestionsRoute
   '/admin/student-data': typeof AdminStudentDataRoute
   '/courses/c-language-1': typeof CoursesCLanguage1RouteWithChildren
+  '/courses/java-language-1': typeof CoursesJavaLanguage1RouteWithChildren
   '/admin/': typeof AdminIndexRoute
   '/attempts/$attemptId/result': typeof AttemptsAttemptIdResultRoute
   '/courses/c-language-1/practice': typeof CoursesCLanguage1PracticeRoute
+  '/courses/java-language-1/practice': typeof CoursesJavaLanguage1PracticeRoute
   '/courses/c-language-1/exams/final-2026-first': typeof CoursesCLanguage1ExamsFinal2026FirstRoute
 }
 export interface FileRouteTypes {
@@ -159,9 +178,11 @@ export interface FileRouteTypes {
     | '/admin/questions'
     | '/admin/student-data'
     | '/courses/c-language-1'
+    | '/courses/java-language-1'
     | '/admin/'
     | '/attempts/$attemptId/result'
     | '/courses/c-language-1/practice'
+    | '/courses/java-language-1/practice'
     | '/courses/c-language-1/exams/final-2026-first'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -175,9 +196,11 @@ export interface FileRouteTypes {
     | '/admin/questions'
     | '/admin/student-data'
     | '/courses/c-language-1'
+    | '/courses/java-language-1'
     | '/admin'
     | '/attempts/$attemptId/result'
     | '/courses/c-language-1/practice'
+    | '/courses/java-language-1/practice'
     | '/courses/c-language-1/exams/final-2026-first'
   id:
     | '__root__'
@@ -191,9 +214,11 @@ export interface FileRouteTypes {
     | '/admin/questions'
     | '/admin/student-data'
     | '/courses/c-language-1'
+    | '/courses/java-language-1'
     | '/admin/'
     | '/attempts/$attemptId/result'
     | '/courses/c-language-1/practice'
+    | '/courses/java-language-1/practice'
     | '/courses/c-language-1/exams/final-2026-first'
   fileRoutesById: FileRoutesById
 }
@@ -208,6 +233,7 @@ export interface RootRouteChildren {
   AdminQuestionsRoute: typeof AdminQuestionsRoute
   AdminStudentDataRoute: typeof AdminStudentDataRoute
   CoursesCLanguage1Route: typeof CoursesCLanguage1RouteWithChildren
+  CoursesJavaLanguage1Route: typeof CoursesJavaLanguage1RouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
   AttemptsAttemptIdResultRoute: typeof AttemptsAttemptIdResultRoute
 }
@@ -240,6 +266,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/java-language-1': {
+      id: '/courses/java-language-1'
+      path: '/courses/java-language-1'
+      fullPath: '/courses/java-language-1'
+      preLoaderRoute: typeof CoursesJavaLanguage1RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/courses/c-language-1': {
@@ -291,6 +324,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminActivityLogsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/courses/java-language-1/practice': {
+      id: '/courses/java-language-1/practice'
+      path: '/practice'
+      fullPath: '/courses/java-language-1/practice'
+      preLoaderRoute: typeof CoursesJavaLanguage1PracticeRouteImport
+      parentRoute: typeof CoursesJavaLanguage1Route
+    }
     '/courses/c-language-1/practice': {
       id: '/courses/c-language-1/practice'
       path: '/practice'
@@ -329,6 +369,17 @@ const CoursesCLanguage1RouteChildren: CoursesCLanguage1RouteChildren = {
 const CoursesCLanguage1RouteWithChildren =
   CoursesCLanguage1Route._addFileChildren(CoursesCLanguage1RouteChildren)
 
+interface CoursesJavaLanguage1RouteChildren {
+  CoursesJavaLanguage1PracticeRoute: typeof CoursesJavaLanguage1PracticeRoute
+}
+
+const CoursesJavaLanguage1RouteChildren: CoursesJavaLanguage1RouteChildren = {
+  CoursesJavaLanguage1PracticeRoute: CoursesJavaLanguage1PracticeRoute,
+}
+
+const CoursesJavaLanguage1RouteWithChildren =
+  CoursesJavaLanguage1Route._addFileChildren(CoursesJavaLanguage1RouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
@@ -340,6 +391,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminQuestionsRoute: AdminQuestionsRoute,
   AdminStudentDataRoute: AdminStudentDataRoute,
   CoursesCLanguage1Route: CoursesCLanguage1RouteWithChildren,
+  CoursesJavaLanguage1Route: CoursesJavaLanguage1RouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
   AttemptsAttemptIdResultRoute: AttemptsAttemptIdResultRoute,
 }

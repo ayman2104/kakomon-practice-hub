@@ -14,6 +14,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as CoursesCLanguage1RouteImport } from './routes/courses.c-language-1'
+import { Route as AdminStudentDataRouteImport } from './routes/admin.student-data'
 import { Route as AdminQuestionsRouteImport } from './routes/admin.questions'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminFeedbackRouteImport } from './routes/admin.feedback'
@@ -46,6 +47,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
 const CoursesCLanguage1Route = CoursesCLanguage1RouteImport.update({
   id: '/courses/c-language-1',
   path: '/courses/c-language-1',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminStudentDataRoute = AdminStudentDataRouteImport.update({
+  id: '/admin/student-data',
+  path: '/admin/student-data',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminQuestionsRoute = AdminQuestionsRouteImport.update({
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/admin/feedback': typeof AdminFeedbackRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/questions': typeof AdminQuestionsRoute
+  '/admin/student-data': typeof AdminStudentDataRoute
   '/courses/c-language-1': typeof CoursesCLanguage1RouteWithChildren
   '/admin/': typeof AdminIndexRoute
   '/attempts/$attemptId/result': typeof AttemptsAttemptIdResultRoute
@@ -115,6 +122,7 @@ export interface FileRoutesByTo {
   '/admin/feedback': typeof AdminFeedbackRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/questions': typeof AdminQuestionsRoute
+  '/admin/student-data': typeof AdminStudentDataRoute
   '/courses/c-language-1': typeof CoursesCLanguage1RouteWithChildren
   '/admin': typeof AdminIndexRoute
   '/attempts/$attemptId/result': typeof AttemptsAttemptIdResultRoute
@@ -131,6 +139,7 @@ export interface FileRoutesById {
   '/admin/feedback': typeof AdminFeedbackRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/questions': typeof AdminQuestionsRoute
+  '/admin/student-data': typeof AdminStudentDataRoute
   '/courses/c-language-1': typeof CoursesCLanguage1RouteWithChildren
   '/admin/': typeof AdminIndexRoute
   '/attempts/$attemptId/result': typeof AttemptsAttemptIdResultRoute
@@ -148,6 +157,7 @@ export interface FileRouteTypes {
     | '/admin/feedback'
     | '/admin/login'
     | '/admin/questions'
+    | '/admin/student-data'
     | '/courses/c-language-1'
     | '/admin/'
     | '/attempts/$attemptId/result'
@@ -163,6 +173,7 @@ export interface FileRouteTypes {
     | '/admin/feedback'
     | '/admin/login'
     | '/admin/questions'
+    | '/admin/student-data'
     | '/courses/c-language-1'
     | '/admin'
     | '/attempts/$attemptId/result'
@@ -178,6 +189,7 @@ export interface FileRouteTypes {
     | '/admin/feedback'
     | '/admin/login'
     | '/admin/questions'
+    | '/admin/student-data'
     | '/courses/c-language-1'
     | '/admin/'
     | '/attempts/$attemptId/result'
@@ -194,6 +206,7 @@ export interface RootRouteChildren {
   AdminFeedbackRoute: typeof AdminFeedbackRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminQuestionsRoute: typeof AdminQuestionsRoute
+  AdminStudentDataRoute: typeof AdminStudentDataRoute
   CoursesCLanguage1Route: typeof CoursesCLanguage1RouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
   AttemptsAttemptIdResultRoute: typeof AttemptsAttemptIdResultRoute
@@ -234,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/courses/c-language-1'
       fullPath: '/courses/c-language-1'
       preLoaderRoute: typeof CoursesCLanguage1RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/student-data': {
+      id: '/admin/student-data'
+      path: '/admin/student-data'
+      fullPath: '/admin/student-data'
+      preLoaderRoute: typeof AdminStudentDataRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/questions': {
@@ -318,6 +338,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminFeedbackRoute: AdminFeedbackRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminQuestionsRoute: AdminQuestionsRoute,
+  AdminStudentDataRoute: AdminStudentDataRoute,
   CoursesCLanguage1Route: CoursesCLanguage1RouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
   AttemptsAttemptIdResultRoute: AttemptsAttemptIdResultRoute,

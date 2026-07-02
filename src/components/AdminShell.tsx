@@ -25,6 +25,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
           {[
             ["ダッシュボード", "/admin"],
             ["問題管理", "/admin/questions"],
+            ["学生データ管理", "/admin/student-data"],
             ["AI生成", "/admin/ai-generator"],
             ["フィードバック", "/admin/feedback"],
             ["アクティビティ", "/admin/activity-logs"],

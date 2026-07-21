@@ -18,6 +18,14 @@ const COURSES = [
     label: "期末試験・ランダム問題",
   },
   {
+    slug: "cpp-language-2",
+    to: "/courses/cpp-language-2",
+    icon: "📗",
+    category: "プログラミング",
+    title: "Ｃ++言語Ⅱ",
+    label: "ランダム問題 / 第8回〜第13回",
+  },
+  {
     slug: "java-language-1",
     to: "/courses/java-language-1",
     icon: "☕",
@@ -75,7 +83,7 @@ function Dashboard() {
           {COURSES.map((course) => (
             <Link
               key={course.slug}
-              to={course.to}
+              to={course.to as any}
               onClick={() => logCourseOpen(course.slug)}
               className="group bg-card rounded-3xl shadow-[var(--shadow-card)] p-5 min-h-[150px] hover:-translate-y-1 hover:shadow-lg transition flex flex-col justify-between"
             >

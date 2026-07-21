@@ -14,6 +14,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as CoursesJavaLanguage1RouteImport } from './routes/courses.java-language-1'
+import { Route as CoursesCppLanguage2RouteImport } from './routes/courses.cpp-language-2'
 import { Route as CoursesCLanguage1RouteImport } from './routes/courses.c-language-1'
 import { Route as AdminStudentDataRouteImport } from './routes/admin.student-data'
 import { Route as AdminQuestionsRouteImport } from './routes/admin.questions'
@@ -22,6 +23,7 @@ import { Route as AdminFeedbackRouteImport } from './routes/admin.feedback'
 import { Route as AdminAiGeneratorRouteImport } from './routes/admin.ai-generator'
 import { Route as AdminActivityLogsRouteImport } from './routes/admin.activity-logs'
 import { Route as CoursesJavaLanguage1PracticeRouteImport } from './routes/courses.java-language-1.practice'
+import { Route as CoursesCppLanguage2PracticeRouteImport } from './routes/courses.cpp-language-2.practice'
 import { Route as CoursesCLanguage1PracticeRouteImport } from './routes/courses.c-language-1.practice'
 import { Route as AttemptsAttemptIdResultRouteImport } from './routes/attempts.$attemptId.result'
 import { Route as CoursesCLanguage1ExamsFinal2026FirstRouteImport } from './routes/courses.c-language-1.exams.final-2026-first'
@@ -49,6 +51,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
 const CoursesJavaLanguage1Route = CoursesJavaLanguage1RouteImport.update({
   id: '/courses/java-language-1',
   path: '/courses/java-language-1',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesCppLanguage2Route = CoursesCppLanguage2RouteImport.update({
+  id: '/courses/cpp-language-2',
+  path: '/courses/cpp-language-2',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CoursesCLanguage1Route = CoursesCLanguage1RouteImport.update({
@@ -92,6 +99,12 @@ const CoursesJavaLanguage1PracticeRoute =
     path: '/practice',
     getParentRoute: () => CoursesJavaLanguage1Route,
   } as any)
+const CoursesCppLanguage2PracticeRoute =
+  CoursesCppLanguage2PracticeRouteImport.update({
+    id: '/practice',
+    path: '/practice',
+    getParentRoute: () => CoursesCppLanguage2Route,
+  } as any)
 const CoursesCLanguage1PracticeRoute =
   CoursesCLanguage1PracticeRouteImport.update({
     id: '/practice',
@@ -121,10 +134,12 @@ export interface FileRoutesByFullPath {
   '/admin/questions': typeof AdminQuestionsRoute
   '/admin/student-data': typeof AdminStudentDataRoute
   '/courses/c-language-1': typeof CoursesCLanguage1RouteWithChildren
+  '/courses/cpp-language-2': typeof CoursesCppLanguage2RouteWithChildren
   '/courses/java-language-1': typeof CoursesJavaLanguage1RouteWithChildren
   '/admin/': typeof AdminIndexRoute
   '/attempts/$attemptId/result': typeof AttemptsAttemptIdResultRoute
   '/courses/c-language-1/practice': typeof CoursesCLanguage1PracticeRoute
+  '/courses/cpp-language-2/practice': typeof CoursesCppLanguage2PracticeRoute
   '/courses/java-language-1/practice': typeof CoursesJavaLanguage1PracticeRoute
   '/courses/c-language-1/exams/final-2026-first': typeof CoursesCLanguage1ExamsFinal2026FirstRoute
 }
@@ -139,10 +154,12 @@ export interface FileRoutesByTo {
   '/admin/questions': typeof AdminQuestionsRoute
   '/admin/student-data': typeof AdminStudentDataRoute
   '/courses/c-language-1': typeof CoursesCLanguage1RouteWithChildren
+  '/courses/cpp-language-2': typeof CoursesCppLanguage2RouteWithChildren
   '/courses/java-language-1': typeof CoursesJavaLanguage1RouteWithChildren
   '/admin': typeof AdminIndexRoute
   '/attempts/$attemptId/result': typeof AttemptsAttemptIdResultRoute
   '/courses/c-language-1/practice': typeof CoursesCLanguage1PracticeRoute
+  '/courses/cpp-language-2/practice': typeof CoursesCppLanguage2PracticeRoute
   '/courses/java-language-1/practice': typeof CoursesJavaLanguage1PracticeRoute
   '/courses/c-language-1/exams/final-2026-first': typeof CoursesCLanguage1ExamsFinal2026FirstRoute
 }
@@ -158,10 +175,12 @@ export interface FileRoutesById {
   '/admin/questions': typeof AdminQuestionsRoute
   '/admin/student-data': typeof AdminStudentDataRoute
   '/courses/c-language-1': typeof CoursesCLanguage1RouteWithChildren
+  '/courses/cpp-language-2': typeof CoursesCppLanguage2RouteWithChildren
   '/courses/java-language-1': typeof CoursesJavaLanguage1RouteWithChildren
   '/admin/': typeof AdminIndexRoute
   '/attempts/$attemptId/result': typeof AttemptsAttemptIdResultRoute
   '/courses/c-language-1/practice': typeof CoursesCLanguage1PracticeRoute
+  '/courses/cpp-language-2/practice': typeof CoursesCppLanguage2PracticeRoute
   '/courses/java-language-1/practice': typeof CoursesJavaLanguage1PracticeRoute
   '/courses/c-language-1/exams/final-2026-first': typeof CoursesCLanguage1ExamsFinal2026FirstRoute
 }
@@ -178,10 +197,12 @@ export interface FileRouteTypes {
     | '/admin/questions'
     | '/admin/student-data'
     | '/courses/c-language-1'
+    | '/courses/cpp-language-2'
     | '/courses/java-language-1'
     | '/admin/'
     | '/attempts/$attemptId/result'
     | '/courses/c-language-1/practice'
+    | '/courses/cpp-language-2/practice'
     | '/courses/java-language-1/practice'
     | '/courses/c-language-1/exams/final-2026-first'
   fileRoutesByTo: FileRoutesByTo
@@ -196,10 +217,12 @@ export interface FileRouteTypes {
     | '/admin/questions'
     | '/admin/student-data'
     | '/courses/c-language-1'
+    | '/courses/cpp-language-2'
     | '/courses/java-language-1'
     | '/admin'
     | '/attempts/$attemptId/result'
     | '/courses/c-language-1/practice'
+    | '/courses/cpp-language-2/practice'
     | '/courses/java-language-1/practice'
     | '/courses/c-language-1/exams/final-2026-first'
   id:
@@ -214,10 +237,12 @@ export interface FileRouteTypes {
     | '/admin/questions'
     | '/admin/student-data'
     | '/courses/c-language-1'
+    | '/courses/cpp-language-2'
     | '/courses/java-language-1'
     | '/admin/'
     | '/attempts/$attemptId/result'
     | '/courses/c-language-1/practice'
+    | '/courses/cpp-language-2/practice'
     | '/courses/java-language-1/practice'
     | '/courses/c-language-1/exams/final-2026-first'
   fileRoutesById: FileRoutesById
@@ -233,6 +258,7 @@ export interface RootRouteChildren {
   AdminQuestionsRoute: typeof AdminQuestionsRoute
   AdminStudentDataRoute: typeof AdminStudentDataRoute
   CoursesCLanguage1Route: typeof CoursesCLanguage1RouteWithChildren
+  CoursesCppLanguage2Route: typeof CoursesCppLanguage2RouteWithChildren
   CoursesJavaLanguage1Route: typeof CoursesJavaLanguage1RouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
   AttemptsAttemptIdResultRoute: typeof AttemptsAttemptIdResultRoute
@@ -273,6 +299,13 @@ declare module '@tanstack/react-router' {
       path: '/courses/java-language-1'
       fullPath: '/courses/java-language-1'
       preLoaderRoute: typeof CoursesJavaLanguage1RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/cpp-language-2': {
+      id: '/courses/cpp-language-2'
+      path: '/courses/cpp-language-2'
+      fullPath: '/courses/cpp-language-2'
+      preLoaderRoute: typeof CoursesCppLanguage2RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/courses/c-language-1': {
@@ -331,6 +364,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesJavaLanguage1PracticeRouteImport
       parentRoute: typeof CoursesJavaLanguage1Route
     }
+    '/courses/cpp-language-2/practice': {
+      id: '/courses/cpp-language-2/practice'
+      path: '/practice'
+      fullPath: '/courses/cpp-language-2/practice'
+      preLoaderRoute: typeof CoursesCppLanguage2PracticeRouteImport
+      parentRoute: typeof CoursesCppLanguage2Route
+    }
     '/courses/c-language-1/practice': {
       id: '/courses/c-language-1/practice'
       path: '/practice'
@@ -369,6 +409,17 @@ const CoursesCLanguage1RouteChildren: CoursesCLanguage1RouteChildren = {
 const CoursesCLanguage1RouteWithChildren =
   CoursesCLanguage1Route._addFileChildren(CoursesCLanguage1RouteChildren)
 
+interface CoursesCppLanguage2RouteChildren {
+  CoursesCppLanguage2PracticeRoute: typeof CoursesCppLanguage2PracticeRoute
+}
+
+const CoursesCppLanguage2RouteChildren: CoursesCppLanguage2RouteChildren = {
+  CoursesCppLanguage2PracticeRoute: CoursesCppLanguage2PracticeRoute,
+}
+
+const CoursesCppLanguage2RouteWithChildren =
+  CoursesCppLanguage2Route._addFileChildren(CoursesCppLanguage2RouteChildren)
+
 interface CoursesJavaLanguage1RouteChildren {
   CoursesJavaLanguage1PracticeRoute: typeof CoursesJavaLanguage1PracticeRoute
 }
@@ -391,6 +442,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminQuestionsRoute: AdminQuestionsRoute,
   AdminStudentDataRoute: AdminStudentDataRoute,
   CoursesCLanguage1Route: CoursesCLanguage1RouteWithChildren,
+  CoursesCppLanguage2Route: CoursesCppLanguage2RouteWithChildren,
   CoursesJavaLanguage1Route: CoursesJavaLanguage1RouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
   AttemptsAttemptIdResultRoute: AttemptsAttemptIdResultRoute,

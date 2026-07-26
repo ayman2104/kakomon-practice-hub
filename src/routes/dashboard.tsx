@@ -23,7 +23,7 @@ const COURSES = [
     icon: "📗",
     category: "プログラミング",
     title: "Ｃ++言語Ⅱ",
-    label: "ランダム問題 / 第8回〜第13回",
+    label: "試験準備 / 第8回〜第13回",
   },
   {
     slug: "java-language-1",

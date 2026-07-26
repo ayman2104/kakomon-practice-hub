@@ -23,9 +23,9 @@ import { Route as AdminFeedbackRouteImport } from './routes/admin.feedback'
 import { Route as AdminAiGeneratorRouteImport } from './routes/admin.ai-generator'
 import { Route as AdminActivityLogsRouteImport } from './routes/admin.activity-logs'
 import { Route as CoursesJavaLanguage1PracticeRouteImport } from './routes/courses.java-language-1.practice'
-import { Route as CoursesCppLanguage2PracticeRouteImport } from './routes/courses.cpp-language-2.practice'
 import { Route as CoursesCLanguage1PracticeRouteImport } from './routes/courses.c-language-1.practice'
 import { Route as AttemptsAttemptIdResultRouteImport } from './routes/attempts.$attemptId.result'
+import { Route as CoursesCppLanguage2ExamsShikenJunbiRouteImport } from './routes/courses.cpp-language-2.exams.shiken-junbi'
 import { Route as CoursesCLanguage1ExamsFinal2026FirstRouteImport } from './routes/courses.c-language-1.exams.final-2026-first'
 
 const LoginRoute = LoginRouteImport.update({
@@ -99,12 +99,6 @@ const CoursesJavaLanguage1PracticeRoute =
     path: '/practice',
     getParentRoute: () => CoursesJavaLanguage1Route,
   } as any)
-const CoursesCppLanguage2PracticeRoute =
-  CoursesCppLanguage2PracticeRouteImport.update({
-    id: '/practice',
-    path: '/practice',
-    getParentRoute: () => CoursesCppLanguage2Route,
-  } as any)
 const CoursesCLanguage1PracticeRoute =
   CoursesCLanguage1PracticeRouteImport.update({
     id: '/practice',
@@ -116,6 +110,12 @@ const AttemptsAttemptIdResultRoute = AttemptsAttemptIdResultRouteImport.update({
   path: '/attempts/$attemptId/result',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoursesCppLanguage2ExamsShikenJunbiRoute =
+  CoursesCppLanguage2ExamsShikenJunbiRouteImport.update({
+    id: '/exams/shiken-junbi',
+    path: '/exams/shiken-junbi',
+    getParentRoute: () => CoursesCppLanguage2Route,
+  } as any)
 const CoursesCLanguage1ExamsFinal2026FirstRoute =
   CoursesCLanguage1ExamsFinal2026FirstRouteImport.update({
     id: '/exams/final-2026-first',
@@ -139,9 +139,9 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/attempts/$attemptId/result': typeof AttemptsAttemptIdResultRoute
   '/courses/c-language-1/practice': typeof CoursesCLanguage1PracticeRoute
-  '/courses/cpp-language-2/practice': typeof CoursesCppLanguage2PracticeRoute
   '/courses/java-language-1/practice': typeof CoursesJavaLanguage1PracticeRoute
   '/courses/c-language-1/exams/final-2026-first': typeof CoursesCLanguage1ExamsFinal2026FirstRoute
+  '/courses/cpp-language-2/exams/shiken-junbi': typeof CoursesCppLanguage2ExamsShikenJunbiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -159,9 +159,9 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/attempts/$attemptId/result': typeof AttemptsAttemptIdResultRoute
   '/courses/c-language-1/practice': typeof CoursesCLanguage1PracticeRoute
-  '/courses/cpp-language-2/practice': typeof CoursesCppLanguage2PracticeRoute
   '/courses/java-language-1/practice': typeof CoursesJavaLanguage1PracticeRoute
   '/courses/c-language-1/exams/final-2026-first': typeof CoursesCLanguage1ExamsFinal2026FirstRoute
+  '/courses/cpp-language-2/exams/shiken-junbi': typeof CoursesCppLanguage2ExamsShikenJunbiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -180,9 +180,9 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/attempts/$attemptId/result': typeof AttemptsAttemptIdResultRoute
   '/courses/c-language-1/practice': typeof CoursesCLanguage1PracticeRoute
-  '/courses/cpp-language-2/practice': typeof CoursesCppLanguage2PracticeRoute
   '/courses/java-language-1/practice': typeof CoursesJavaLanguage1PracticeRoute
   '/courses/c-language-1/exams/final-2026-first': typeof CoursesCLanguage1ExamsFinal2026FirstRoute
+  '/courses/cpp-language-2/exams/shiken-junbi': typeof CoursesCppLanguage2ExamsShikenJunbiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -202,9 +202,9 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/attempts/$attemptId/result'
     | '/courses/c-language-1/practice'
-    | '/courses/cpp-language-2/practice'
     | '/courses/java-language-1/practice'
     | '/courses/c-language-1/exams/final-2026-first'
+    | '/courses/cpp-language-2/exams/shiken-junbi'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -222,9 +222,9 @@ export interface FileRouteTypes {
     | '/admin'
     | '/attempts/$attemptId/result'
     | '/courses/c-language-1/practice'
-    | '/courses/cpp-language-2/practice'
     | '/courses/java-language-1/practice'
     | '/courses/c-language-1/exams/final-2026-first'
+    | '/courses/cpp-language-2/exams/shiken-junbi'
   id:
     | '__root__'
     | '/'
@@ -242,9 +242,9 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/attempts/$attemptId/result'
     | '/courses/c-language-1/practice'
-    | '/courses/cpp-language-2/practice'
     | '/courses/java-language-1/practice'
     | '/courses/c-language-1/exams/final-2026-first'
+    | '/courses/cpp-language-2/exams/shiken-junbi'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -364,13 +364,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesJavaLanguage1PracticeRouteImport
       parentRoute: typeof CoursesJavaLanguage1Route
     }
-    '/courses/cpp-language-2/practice': {
-      id: '/courses/cpp-language-2/practice'
-      path: '/practice'
-      fullPath: '/courses/cpp-language-2/practice'
-      preLoaderRoute: typeof CoursesCppLanguage2PracticeRouteImport
-      parentRoute: typeof CoursesCppLanguage2Route
-    }
     '/courses/c-language-1/practice': {
       id: '/courses/c-language-1/practice'
       path: '/practice'
@@ -384,6 +377,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/attempts/$attemptId/result'
       preLoaderRoute: typeof AttemptsAttemptIdResultRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/courses/cpp-language-2/exams/shiken-junbi': {
+      id: '/courses/cpp-language-2/exams/shiken-junbi'
+      path: '/exams/shiken-junbi'
+      fullPath: '/courses/cpp-language-2/exams/shiken-junbi'
+      preLoaderRoute: typeof CoursesCppLanguage2ExamsShikenJunbiRouteImport
+      parentRoute: typeof CoursesCppLanguage2Route
     }
     '/courses/c-language-1/exams/final-2026-first': {
       id: '/courses/c-language-1/exams/final-2026-first'
@@ -410,11 +410,12 @@ const CoursesCLanguage1RouteWithChildren =
   CoursesCLanguage1Route._addFileChildren(CoursesCLanguage1RouteChildren)
 
 interface CoursesCppLanguage2RouteChildren {
-  CoursesCppLanguage2PracticeRoute: typeof CoursesCppLanguage2PracticeRoute
+  CoursesCppLanguage2ExamsShikenJunbiRoute: typeof CoursesCppLanguage2ExamsShikenJunbiRoute
 }
 
 const CoursesCppLanguage2RouteChildren: CoursesCppLanguage2RouteChildren = {
-  CoursesCppLanguage2PracticeRoute: CoursesCppLanguage2PracticeRoute,
+  CoursesCppLanguage2ExamsShikenJunbiRoute:
+    CoursesCppLanguage2ExamsShikenJunbiRoute,
 }
 
 const CoursesCppLanguage2RouteWithChildren =
